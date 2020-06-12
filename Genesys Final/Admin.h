@@ -1,3 +1,9 @@
+#ifndef ADMIN_H_INCLUDED
+#define ADMIN_H_INCLUDED
+/////////////////
+
+///
+
 #include<stdio.h>
 #include<conio.h>
 #include<math.h>
@@ -6,9 +12,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
-
-void stud_enter();
-void admin()
+void Admin()
 {
     system("cls");
     char inputed_pass[25], actual_pass[25];
@@ -56,7 +60,7 @@ void admin()
     {
     	int opt;
     	i=0;
-        printf("Invalid Password.\n\n");
+        printf("\nInvalid Password.\n\n");
         printf("What you want to Do:\n");
         printf("\t1. Try Again.\n");
         printf("\t2. Go Back.\n\n\t");
@@ -83,43 +87,31 @@ void admin()
         switch(opt)
         {
         	case(1):
-        		main();
+        		Admin();
         		break;
         	case(2):
-        		exit(1); //change this to actual main later
+        		main_menu(); //change this to actual main later
         		break;
 
         }
     }
-
-
 }
-/*void adminwin1()
-{
-    system("cls");
-    printf("\n\n\n=========================================================");
-    printf("\nWelcome to Admin Mode.\n");
-    printf("\n=========================================================");
-    printf("\nPress Any Key to Continue...\n\n\n");
-    getch();
-    adminwin2();
-}*/
 
 void adminwin1()
 {
 	system("cls");
 	int opt,i=0;
 	char ch;
-	printf("\n=========================================================");
+	printf("\n===================================================================");
     printf("\n Welcome to Admin Mode.\n");
-    printf("=========================================================");
+    printf("=====================================================================");
 	printf("\n\n Choose your option :\n");
         printf(" \t1. Change Password.\n");
-        printf(" \t2. Create new database.\n");
-        printf(" \t3. Show list of subject.\n");
-        printf(" \t4. Show list of students.\n");
+        printf(" \t2. Create New Database.\n");
+        printf(" \t3. Show the List of Subjects.\n");
+        printf(" \t4. Show the List of Students.\n");
         printf(" \t5. Go Back.\n\n\t");
-        printf("Option : ");
+        printf("Your Choice: ");
         while(1)
         {
             ch=getch();
@@ -195,7 +187,7 @@ void adminpasschange()
             i++;
         }
     }
-	printf("\nRe-enter New Password: ");
+	printf("\nRe-Enter New Password: ");
 	i=0;
 	while(1)
     {
@@ -233,7 +225,7 @@ void adminpasschange()
     	filePointer = fopen("Admin/password.txt", "w");
     	fprintf(filePointer, "%s",string1);
     	printf("\nPassword Changed Successfully!\n");
-    	printf("\nPress Any Key to Continue...\n");
+    	printf("\nPress Any Key to Continue.\n");
     	getch();
 		adminwin1();
 	}
@@ -347,7 +339,7 @@ void student_data_enter()
 		char student_password[25];
 		char stu_firstname[20],stu_middlename[20],stu_lastname[20];
 		again:
-		printf("\nEnter PRN of %dth student(only integer value): ", i+1);
+		printf("\nEnter PRN of %dth Student(Only Integer Value): ", i+1);
 		//scanf("%d", &prn);
 		///
 		int prn=0;
@@ -383,14 +375,14 @@ void student_data_enter()
         {
             if(prn == *(student_PRN_array+k))
             {
-                printf("\n Already exists\n");
+                printf("\n Already Exists.\n");
                 goto again;
             }
         }
         *(student_PRN_array+j)=prn;
         j++;
-		printf("\nEnter Name of %dth with PRN %d student: ", i+1,prn);
-		printf("\n\tFirst name : ");
+		printf("\nEnter Name of %dth with PRN %d Student: ", i+1,prn);
+		printf("\n\tFirst Name: ");
 		///
 		z=0;
 		while(1)
@@ -415,7 +407,7 @@ void student_data_enter()
         }
 		///
 		//scanf("%s", &stu_firstname);
-		printf("\n\tMiddle name : ");
+		printf("\n\tMiddle Name: ");
 		z=0;
 		while(1)
         {
@@ -438,7 +430,7 @@ void student_data_enter()
             }
         }
 		//scanf("%s", &stu_middlename);
-		printf("\n\tLast name : ");
+		printf("\n\tLast Name: ");
 		//scanf("%s", &stu_lastname);
 		z=0;
 		while(1)
@@ -470,7 +462,7 @@ void student_data_enter()
 void teacher_data_enter()
 {
 	system("cls");
-	printf("Teacher and Subject details\n\n");
+	printf("Teacher and Subject Details:\n\n");
 	int num1,num2;
 	int k;
 	FILE *filePointer ;
@@ -508,7 +500,7 @@ void teacher_data_enter()
         }
 		//scanf("%s", &subject);
 		printf("\nEnter Name of %dth Subject Teacher: ", k+1);
-		printf("\n\tFirst name : ");
+		printf("\n\tFirst Name : ");
 		//scanf("%s", &tea_firstname);
 		i=0;
 		while(1)
@@ -531,7 +523,7 @@ void teacher_data_enter()
                 i++;
             }
         }
-		printf("\n\tMiddle name : ");
+		printf("\n\tMiddle Name : ");
 		i=0;
 		while(1)
         {
@@ -553,7 +545,7 @@ void teacher_data_enter()
                 i++;
             }
         }
-		printf("\n\tLast name : ");
+		printf("\n\tLast Name : ");
 		//scanf("%s", &tea_lastname);
 		i=0;
 		while(1)
@@ -593,7 +585,8 @@ void list_subject()
     listofsubject = fopen("Admin/teadata.txt","r");
     if( listofsubject == NULL)
     {
-        printf("File is empty\nPlease create new database");
+        printf("File is empty.\nPlease create new database");
+        printf("\nPress Any Key to Continue.\n");
         getch();
         adminwin1();
     }
@@ -610,6 +603,8 @@ void list_subject()
         printf("\t%10d %-20s %-45s\n",cnt,subject,firstname);
         cnt++;
     }
+    printf("\n\n\nTask Completed Sucessfully!");
+    printf("\nPress Any Key to Continue...\n");
     getch();
     adminwin1();
 
@@ -623,12 +618,13 @@ void list_student()
     listofstudent = fopen("Admin/studdata.txt","r");
     if( listofstudent == NULL)
     {
-        printf("File is empty\nPlease create new database");
+        printf("File is Empty.\nCreate New Database.");
+        printf("\nPress Any Key to Continue...\n");
         getch();
         adminwin1();
     }
-    printf("List of students");
-    printf("\n================");
+    printf("List of students:");
+    printf("\n========================");
     printf("\n========================");
     printf("\n\t%10s %-10s %-75s \n","Sr. No.","PRN","Student Information");
     while(fscanf(listofstudent,"%d %s %s %s %s",&PRN,firstname,middlename,lastname,password) != EOF)
@@ -640,11 +636,16 @@ void list_student()
         printf("\t%10d %-10d %-75s\n",cnt,PRN,firstname);
         cnt++;
     }
+    printf("\n\n\nTask Completed Sucessfully!");
+    printf("\nPress Any Key to Continue...\n");
     getch();
     adminwin1();
 }
-int main()
-{
-    admin();
-    return 0;
-}
+
+
+
+///
+///
+
+
+#endif // ADMIN_H_INCLUDED

@@ -1,3 +1,9 @@
+#ifndef ADMIN_H_INCLUDED
+#define ADMIN_H_INCLUDED
+/////////////////
+
+///
+
 #include<stdio.h>
 #include<conio.h>
 #include<math.h>
@@ -6,9 +12,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
-
-void stud_enter();
-void admin()
+void Admin()
 {
     system("cls");
     char inputed_pass[25], actual_pass[25];
@@ -56,7 +60,7 @@ void admin()
     {
     	int opt;
     	i=0;
-        printf("Invalid Password.\n\n");
+        printf("\nInvalid Password.\n\n");
         printf("What you want to Do:\n");
         printf("\t1. Try Again.\n");
         printf("\t2. Go Back.\n\n\t");
@@ -83,27 +87,15 @@ void admin()
         switch(opt)
         {
         	case(1):
-        		main();
+        		Admin();
         		break;
         	case(2):
-        		exit(1); //change this to actual main later
+        		main_menu(); //change this to actual main later
         		break;
 
         }
     }
-
-
 }
-/*void adminwin1()
-{
-    system("cls");
-    printf("\n\n\n=========================================================");
-    printf("\nWelcome to Admin Mode.\n");
-    printf("\n=========================================================");
-    printf("\nPress Any Key to Continue...\n\n\n");
-    getch();
-    adminwin2();
-}*/
 
 void adminwin1()
 {
@@ -643,8 +635,11 @@ void list_student()
     getch();
     adminwin1();
 }
-int main()
-{
-    admin();
-    return 0;
-}
+
+
+
+///
+///
+
+
+#endif // ADMIN_H_INCLUDED
